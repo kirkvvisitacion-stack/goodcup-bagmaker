@@ -160,7 +160,10 @@ export function zip(files) {
 }
 
 // ---------- names (deliver_sides.py): the folder the team uploads to the NAS inbox
+// a typed value becomes part of a file name: no folder breaks, no characters Windows or the NAS refuse
+export function cleanName(s) { return String(s || "").replace(/[\/\\]/g, "-").replace(/[:*?"<>|\u0000-\u001f]/g, "").replace(/\s+/g, " ").trim().replace(/^\.+/, "").trim(); }
 export function names(ctrl, name, size, stickerKind) {
+  ctrl = cleanName(ctrl); name = cleanName(name);
   const base = `${ctrl} ${name} ${size}`, folder = `${ctrl} ${name} - ${size}`;
   return { folder, base, shots: { front: `01 ${base} - Front.png`, hero: `02 ${base} - Angled.png`, angle45: `03 ${base} - 45 Degrees.png`, back: `04 ${base} - Back.png` },
     glb: `06 Extras/${base} - 3D Model.glb`, cutout: `06 Extras/${base} - Cutout Front (no shadow).png`, shadow: `06 Extras/${base} - Shadow Only Front.png`,
@@ -169,9 +172,10 @@ export function names(ctrl, name, size, stickerKind) {
 
 // ---------- read the sticker's control number, name and line from the PDF title or file name (Canva export names)
 export function parseTitle(s) {
-  s = (s || "").replace(/\.pdf$/i, "").trim();
-  const m = s.match(/^(\d{2}[-/]\d{2,3}|\d{2})_(.+?)_([A-Za-z]+)(?:-(\d+g))?-(3x3|4x3)$/);
+  // Canva export names, also after a browser adds " (1)" or "-1" to a second download
+  s = (s || "").replace(/\.pdf$/i, "").replace(/\s*\(\d+\)$/, "").replace(/(-[34]x3)-\d$/i, "$1").trim();
+  const m = s.match(/^(\d{2}[-/]\d{2,3}|\d{2})\s*_\s*(.+?)\s*_\s*([A-Za-z]+)(?:-(\d+g))?-([34]x3)$/i);
   if (!m) return null;
-  const code = m[3], line = /AYR$/.test(code) ? "ayr" : code === "PH" ? "ph" : code === "Rare" ? "rare" : "seasonal";
-  return { ctrl: m[1].replace("/", "-"), name: m[2].replace(/-/g, " ").replace(/\s+/g, " ").trim(), code, line, weight: m[4] || null, kind: m[5] };
+  const code = m[3], uc = code.toUpperCase(), line = /AYR$/.test(uc) ? "ayr" : uc === "PH" ? "ph" : uc === "RARE" ? "rare" : "seasonal";
+  return { ctrl: m[1].replace("/", "-"), name: m[2].replace(/-/g, " ").replace(/\s+/g, " ").trim(), code, line, weight: m[4] || null, kind: m[5].toLowerCase() };
 }

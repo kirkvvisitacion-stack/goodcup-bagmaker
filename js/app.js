@@ -63,11 +63,11 @@ function pick(size, sides) {
   for (const b of $("size").children) b.setAttribute("aria-pressed", +b.dataset.v === size);
   for (const b of $("sides").children) { b.setAttribute("aria-pressed", b.dataset.v === sides); b.disabled = RARE(size) ? b.dataset.v !== "black" : b.dataset.v === "black"; }
   const k = key(size, sides), ready = S.keys.includes(k), msgs = [];
-  if (!ready) msgs.push(`The ${SIZE_LABEL[size]} bag in ${sides} is not set up yet. Post the sticker in the team chat and ask for this bag type to be added.`);
+  if (!ready) msgs.push(`The ${SIZE_LABEL[size]} bag with ${sides} sides is not set up yet. Post the sticker in the team chat and ask for this bag type to be added.`);
   if (S.rgb && !S.kind) msgs.push("This PDF is not a 3x3 or 4x3 sticker, so no bag can be made from it.");
   if (S.kind && KIND_FOR[size] !== S.kind) msgs.push(`The ${SIZE_LABEL[size]} bag takes the ${KIND_FOR[size]} sticker; this PDF is ${S.kind}.`);
   if (RARE(size) && S.weight && S.weight !== SIZE_LABEL[size]) msgs.push(`This is a ${S.weight} Rare sticker on the ${SIZE_LABEL[size]} bag. Pick the ${S.weight} bag.`);
-  const hint = S.rgb && S.guessed && !msgs.length ? "The file name did not say which bag this is. Check the size and the bag colour above before you make it." : "";
+  const hint = S.rgb && S.guessed && !msgs.length ? "The file name did not say which bag this is. Check the size and the sides above before you make it." : "";
   $("bagnote").innerHTML = (msgs.length ? `<div class="note warn">${msgs.join("<br>")}</div>` : "") + (hint ? `<div class="note warn">${hint}</div>` : "");
   $("make").disabled = !!msgs.length || !S.rgb || S.busy;
   clearOut(); setStep(S.rgb ? (msgs.length ? 2 : 3) : 1);

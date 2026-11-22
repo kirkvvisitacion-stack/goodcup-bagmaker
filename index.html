@@ -58,6 +58,7 @@ header span{color:var(--ink2);font-size:14px}
 model-viewer{width:100%;height:340px;background:#F4F3EF;border-radius:8px;margin-top:12px;--poster-color:transparent}
 .confirm{display:flex;gap:10px;align-items:flex-start;margin:16px 0 4px;font-size:14.5px}
 .confirm input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--ink)}
+.sidekey{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px;font-size:14px;color:var(--ink2)}.sidekey li{display:flex;align-items:center;gap:10px}.sidekey .dot{flex:none;width:14px;height:14px;border-radius:50%;border:1px solid var(--line);display:inline-block}
 .path{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--soft);padding:10px 12px;border-radius:8px;word-break:break-word;margin-top:10px}
 textarea{width:100%;min-height:120px;font:13.5px/1.5 var(--sans);border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:8px;resize:vertical;color:var(--ink)}
 ol.how{margin:6px 0 0;padding-left:20px;font-size:14px} ol.how li{margin:3px 0}
@@ -100,12 +101,17 @@ footer{color:var(--ink2);font-size:12.5px;text-align:center;margin-top:18px}
         <h2>Bag</h2>
         <div class="row"><span class="lab">Size</span><div class="seg" id="size" role="group" aria-label="Bag size">
           <button data-v="200" aria-pressed="false">200 g</button><button data-v="500" aria-pressed="false">500 g</button><button data-v="1000" aria-pressed="false">1 kg</button><button data-v="100" aria-pressed="false">100 g Rare</button><button data-v="50" aria-pressed="false">50 g Rare</button></div></div>
-        <div class="row"><span class="lab">Bag colour</span><div class="seg" id="sides" role="group" aria-label="Bag colour">
+        <div class="row"><span class="lab">Sides</span><div class="seg" id="sides" role="group" aria-label="Side colour">
           <button data-v="yellow" aria-pressed="false"><span class="dot" style="background:var(--yellow)"></span>Yellow</button>
           <button data-v="white" aria-pressed="false"><span class="dot" style="background:var(--white)"></span>White</button>
           <button data-v="brown" aria-pressed="false"><span class="dot" style="background:var(--brown)"></span>Brown</button>
           <button data-v="black" aria-pressed="false"><span class="dot" style="background:var(--black)"></span>Black</button></div></div>
-        <p class="hint">Bag colour is the colour of the bag sides: yellow for Philippine coffees, white for seasonal, brown for all-year-round, black for Rare.</p>
+        <ul class="sidekey" aria-label="What each side colour is for">
+          <li><span class="dot" style="background:var(--yellow)"></span>Philippine coffees</li>
+          <li><span class="dot" style="background:var(--white)"></span>Seasonal</li>
+          <li><span class="dot" style="background:var(--brown)"></span>All-year-round</li>
+          <li><span class="dot" style="background:var(--black)"></span>Rare</li>
+        </ul>
         <div id="bagnote"></div>
       </div>
     </section>

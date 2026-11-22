@@ -68,12 +68,36 @@ footer{color:var(--ink2);font-size:12.5px;text-align:center;margin-top:18px}
   .check{grid-template-columns:1fr} .views{grid-template-columns:repeat(2,1fr)} .sticker{grid-template-columns:84px 1fr} .sticker img{width:84px}
   .fields{grid-template-columns:1fr} .row .lab{width:100%}
 }
+.back{display:inline-flex;align-items:center;min-height:44px;color:var(--ink2);font-weight:500;text-decoration:none;margin:0 4px}
+.back:hover{text-decoration:underline;color:var(--ink)}
+details.guide{border:1.5px solid var(--ink);border-radius:var(--rc);margin:0 0 18px;background:var(--card)}
+details.guide summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:10px;min-height:52px;padding:0 16px;font-weight:600;font-size:16px}
+details.guide summary::-webkit-details-marker{display:none}
+details.guide summary::after{content:"+";margin-left:auto;font-size:24px;color:var(--ink2)}
+details.guide[open] summary::after{content:"\2212"}
+details.guide summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+details.guide ol{margin:0;padding:4px 18px 16px 38px;font-size:15px}
+details.guide li{margin:8px 0}
+.handoff{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:14.5px}
+.handoff a{color:var(--ink);font-weight:600}
 </style>
 </head>
 <body>
 <div class="wrap">
+  <a class="back" href="https://kirkvvisitacion-stack.github.io/studio/">&larr; Good Cup Studio</a>
   <header><h1>Coffee Bag Maker</h1><span>Attach your new sticker to the bag</span></header>
   <main class="card">
+    <details class="guide">
+      <summary>How to use it <span style="font-weight:400;color:var(--ink2)">(5 quick steps)</span></summary>
+      <ol>
+        <li><b>Get your new sticker.</b> In Canva, download it as PDF Print. Keep the Canva file name.</li>
+        <li><b>Drop it in step 1.</b> Check the control number and coffee name. They become the file names.</li>
+        <li><b>Check the sides.</b> Yellow for Philippine coffees, white for seasonal, brown for all-year-round, black for Rare. Then press Make the bag.</li>
+        <li><b>Read every word.</b> Compare the bag front with your sticker. Tick the box only when they match.</li>
+        <li><b>Save it.</b> Download the folder, then upload it to the NAS Drive folder with the next number.</li>
+      </ol>
+    </details>
+    
     <section class="step" id="s1">
       <div class="num">1</div>
       <div>
@@ -155,6 +179,7 @@ footer{color:var(--ink2);font-size:12.5px;text-align:center;margin-top:18px}
         <button class="btn ghost" id="copy">Copy message</button>
       </div>
     </section>
+  <p class="handoff">Want to create with the 3D bag models in your own Claude? <a href="https://kirkvvisitacion-stack.github.io/studio/handoff/coffee-bag-maker.html">Get the handoff of all the files</a>.</p>
   </main>
   <footer>Everything runs in your browser. The sticker never leaves this computer.</footer>
 </div>
